@@ -1,5 +1,15 @@
 plugins {
-	id 'java'
+    id 'java'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
+}
+
+java {
+    modularity.inferModulePath = true
+}
+
+javafx {
+    version = '11'
+    modules = [ 'javafx.controls']
 }
 
 dependencies {
@@ -22,6 +32,7 @@ task fatJar(type: Jar, dependsOn: classes) {
     dependsOn ":richtextfx:jar"
 
     archiveAppendix = 'fat'
+    duplicatesStrategy = DuplicatesStrategy.WARN
 
     from sourceSets.main.output
     from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
@@ -82,7 +93,11 @@ task RichTextDemo(type: JavaExec, dependsOn: classes,
         description: "An area showing a large number of RichTextFX's features: " +
                 "inlined images, rich text (e.g. text alignment and background colors, etc.), and save/load capabilities") {
     mainClass = 'org.fxmisc.richtext.demo.richtext.RichTextDemo'
+    //jvmArgs "--add-modules","javafx.controls"
+    //print sourceSets.main.output
+    //print configurations.runtimeClasspath
     classpath = files(sourceSets.main.output, configurations.runtimeClasspath)
+    //print classpath
 }
 
 task PopupDemo(type: JavaExec, dependsOn: classes,

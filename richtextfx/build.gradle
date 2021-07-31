@@ -6,10 +6,16 @@ buildscript {
 
 plugins {
     id 'java-library'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'org.unbroken-dome.test-sets' version '4.0.0'
     id 'biz.aQute.bnd.builder' version "5.3.0"
     id 'maven-publish'
     id 'signing'
+}
+
+javafx {
+    version = '11'
+    modules = [ 'javafx.controls']
 }
 
 // OSGi bundle is configured through the bnd.bnd file
@@ -249,6 +255,7 @@ if(doUploadArchives) {
 
 task fatJar(type: Jar, dependsOn: classes) {
     archiveAppendix = 'fat'
+    duplicatesStrategy = DuplicatesStrategy.WARN
 
     manifest.attributes( 'Automatic-Module-Name': 'org.fxmisc.richtext',
                          'Multi-Release': 'true' )

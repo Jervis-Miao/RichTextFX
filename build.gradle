@@ -1,5 +1,6 @@
 subprojects {
     apply plugin: 'eclipse'
+    // apply plugin: 'org.openjfx.javafxplugin' version '0.0.9'
 
     version = '1.0.0-SNAPSHOT'
     ext.specificationVersion = '0.9.0'
@@ -22,5 +23,10 @@ subprojects {
             }
         }
     }
+
+//    if (JavaVersion.current() == JavaVersion.VERSION_11) {
+//        print "ON 11!!!!"
+//        apply  plugin: 'org.openjfx.javafxplugin' version '0.0.9'
+//    }
 
 }
