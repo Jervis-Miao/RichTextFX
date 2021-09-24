@@ -9,6 +9,7 @@ import javafx.css.CssMetaData;
 import javafx.css.StyleConverter;
 import javafx.css.Styleable;
 import javafx.css.StyleableObjectProperty;
+import javafx.css.converter.SizeConverter;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.StrokeLineCap;
@@ -277,7 +278,7 @@ public class TextExt extends Text {
         );
 
         private static final CssMetaData<TextExt, Number[]> BORDER_DASH_ARRAY = new CustomCssMetaData<>(
-                "-rtfx-border-stroke-dash-array", JavaFXCompatibility.SizeConverter_SequenceConverter_getInstance(),
+                "-rtfx-border-stroke-dash-array", SizeConverter.SequenceConverter.getInstance(),
                 new Double[0], n -> n.borderStrokeDashArray
         );
 
@@ -292,7 +293,7 @@ public class TextExt extends Text {
         );
 
         private static final CssMetaData<TextExt, Number[]> UNDERLINE_DASH_ARRAY = new CustomCssMetaData<>(
-                "-rtfx-underline-dash-array", JavaFXCompatibility.SizeConverter_SequenceConverter_getInstance(),
+                "-rtfx-underline-dash-array", SizeConverter.SequenceConverter.getInstance(),
                 new Double[0], n -> n.underlineDashArray
         );
 

@@ -155,7 +155,7 @@ class ParagraphText<PS, SEG, S> extends TextFlowExt {
                 TextExt t = (TextExt) n;
                 // XXX: binding selectionFill to textFill,
                 // see the note at highlightTextFill
-                JavaFXCompatibility.Text_selectionFillProperty(t).bind(t.fillProperty());
+                t.selectionFillProperty().bind(t.fillProperty());
             }
             getChildren().add(n);
         });
@@ -229,7 +229,7 @@ class ParagraphText<PS, SEG, S> extends TextFlowExt {
         carets.removeListener( caretNodeListener );
 
         getChildren().stream().filter( n -> n instanceof TextExt ).map( n -> (TextExt) n )
-        .forEach( t -> JavaFXCompatibility.Text_selectionFillProperty(t).unbind() ); 
+        .forEach( t -> t.selectionFillProperty().unbind()); 
 
         getChildren().clear();
     }
