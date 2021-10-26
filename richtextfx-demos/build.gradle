@@ -3,10 +3,6 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
-java {
-    modularity.inferModulePath = true
-}
-
 javafx {
     version = '11'
     modules = [ 'javafx.controls']
@@ -33,20 +29,6 @@ jar {
             'Implementation-Version': project.version)
     }
 }
-
-task fatJar(type: Jar, dependsOn: classes) {
-    // avoid implicit dependency warning since we use output from the lib projects
-    // See  https://docs.gradle.org/7.0.2/userguide/validation_problems.html#implicit_dependency
-    dependsOn ":richtextfx:jar"
-
-    archiveAppendix = 'fat'
-    duplicatesStrategy = DuplicatesStrategy.WARN
-
-    from sourceSets.main.output
-    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
-}
-
-assemble.dependsOn fatJar
 
 task demos(description: "Lists the names and the descriptions of the demos that can be run via a Gradle task") {
     doLast {

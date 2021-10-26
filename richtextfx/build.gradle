@@ -94,9 +94,6 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 test {
-    dependsOn jar
-    // run tests against jar in case it's a  multi-release jar
-    classpath = files(jar.archivePath, classpath) - sourceSets.main.output
     testLogging {
         // Fancy formatting from http://stackoverflow.com/a/36130467/3634630
         // set options for log level LIFECYCLE
@@ -126,9 +123,6 @@ test {
 }
 
 integrationTest {
-    dependsOn jar
-    // run tests against jar in case it's a  multi-release jar
-    classpath = files(jar.archivePath, classpath) - sourceSets.main.output
     testLogging {
         // Fancy formatting from http://stackoverflow.com/a/36130467/3634630
         // set options for log level LIFECYCLE
@@ -163,7 +157,6 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 }
 
 task sourcesJar(type: Jar) {
-//    into 'java9', { from sourceSets.java9.allSource }
     from sourceSets.main.allSource
     classifier = 'sources'
 }
